@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
     name='django-mail-builder',
     description='Simple template-based EmailMessage builder for Django',
-    version='0.1',
+    version='0.2',
     packages=['mail_builder'],
     author='Curtis Maloney',
     author_email='curtis@tinbrain.net',
