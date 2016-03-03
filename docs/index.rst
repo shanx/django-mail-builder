@@ -8,6 +8,15 @@ Django Mail Builder
 
 Build email messages from templates.
 
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
+   overview
+   templates
+   ref
+
 Quick Start
 -----------
 
@@ -42,13 +51,6 @@ Quick Start
 
       msg = build_message('email/welcome.email', {'user': request.user})
       msg.send()
-
-Contents:
-
-.. toctree::
-   :maxdepth: 2
-
-   ref
 
 
 Indices and tables
