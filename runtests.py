@@ -18,10 +18,12 @@ if not settings.configured:
             }
         },
         INSTALLED_APPS=(
+            'django.contrib.contenttypes',
+            'django.contrib.auth',
             'tests',
         ),
         MIDDLEWARE_CLASSES=[],
-        # ROOT_URLCONF='tests.urls',
+        ROOT_URLCONF='tests.urls',
         EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend',
     )
 
