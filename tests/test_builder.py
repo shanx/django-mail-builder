@@ -20,9 +20,12 @@ class BuilderTestCase(TestCase):
         msg = build_message('subject.email')
         self.assertEqual(msg.subject, 'Test Subject')
 
-    def test_from_email(self):
-        pass
-
     def test_to(self):
         msg = build_message('to.email')
         self.assertEqual(msg.to, ['test@test.com'])
+
+    def test_html(self):
+        msg = build_message('html.email')
+        alts = [alt for alt, mtype in msg.alternatives if mtype == 'text/html']
+        self.assertEqual(len(alts), 1)
+        self.assertHTMLEqual(alts[0], '<h1> Welcome! </h1>')
