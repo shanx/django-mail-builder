@@ -4,7 +4,8 @@ Build EmailMessages easily from templates
 
 ## QuickStart
 
-In your code, you can use the ``build_message`` function to build an ``EmailMessage`` class, sourcing its values from a template.
+In your code, you can use the ``build_message`` function to build an
+``EmailMessage`` class, sourcing its values from a template.
 
 ```
 def build_message(template_names, extra_context=None, force_multipart=False,
@@ -14,23 +15,29 @@ def build_message(template_names, extra_context=None, force_multipart=False,
 Parameters:
 
 template_names::
-  A list of template names to select from.  A single template name will be converted to a list.
+  A list of template names to select from.  A single template name will be
+  wrapped in a list.
 
 extra_context::
   Extra context to be passed when rendering blocks from the template.
 
 force_multipart::
   Force use of ``EmailMultipartMessage`` instead of ``EmailMessage``.
-  If a `html` block is provided then ``EmailMultipartMessage`` will be used anyway.
+
+  If a `html` block is provided then ``EmailMultipartMessage`` will be used
+  anyway.
 
 defaults::
-  Default values to be passed to the message class.  These will be overidden by any template blocks.
+  Default values to be passed to the message class. These will be overidden by
+  any template blocks.
 
 ## Template blocks
 
 ### Scalar fields:
 
-These blocks will be rendered as is, and passed to the message.  If an 'html' block is passed, a ``EmailMultipartMessage`` will be constructed, and the `html` content will be added as a `text/html` alternative.
+These blocks will be rendered as is, and passed to the message. If an 'html'
+block is passed, a ``EmailMultipartMessage`` will be constructed, and the
+`html` content will be added as a `text/html` alternative.
 
 - subject
 - from_email
@@ -39,7 +46,7 @@ These blocks will be rendered as is, and passed to the message.  If an 'html' bl
 
 ### List fields:
 
-These blocks will be rendered, and then split by lines using ``str.splitlines``.
+These blocks will be rendered, and then split by lines using `str.splitlines`.
 
 - to
 - bcc
@@ -49,15 +56,32 @@ These blocks will be rendered, and then split by lines using ``str.splitlines``.
 
 # Views
 
-A utility view is provided that extends ``django.views.generic.FormView`` to send an email on form valid.
+A utility view is provided that extends ``django.views.generic.FormView`` to
+send an email on form valid.
 
 ```
 from mail_builder.views import EmailFormView
 ```
 
-When ``form_valid`` is called, it will build a message using ``email_template``, and pass the form's cleaned_data in context as `form`.
+When ``form_valid`` is called, it will build a message using
+``email_template``, and pass the form's cleaned_data in context as `form`. It
+will then send the message using the `fail_silently` flag as set on the class.
 
 Additional class properties:
 
 - email_template
-- fail_silently
+- email_kwargs = {}
+- fail_silently = False
+
+Two extra methods are added to allow control over context and params:
+
+```
+    def get_email_context(self, form, **kwargs):
+        kwargs.setdefault('form', form.cleaned_data)
+        return kwargs
+
+    def get_email_kwargs(self, form, **kwargs):
+        kwargs.update(self.email_kwargs)
+        return kwargs
+```
+
