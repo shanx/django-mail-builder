@@ -33,7 +33,7 @@ def build_message(template_names, extra_context=None, force_multipart=False,
     for field in ('to', 'bcc', 'cc', 'reply_to'):
         value = render_block(tmpl, field, extra_context)
         if value is not None:
-            data[field] = value.split()
+            data[field] = value.splitlines()
 
     html_content = data.pop('html', None)
     if force_multipart or html_content:
