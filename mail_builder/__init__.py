@@ -1,1 +1,1 @@
-from builder import build_message  # NOQA
+from .builder import build_message  # NOQA
