@@ -19,3 +19,10 @@ class BuilderTestCase(TestCase):
     def test_subject(self):
         msg = build_message('subject.email')
         self.assertEqual(msg.subject, 'Test Subject')
+
+    def test_from_email(self):
+        pass
+
+    def test_to(self):
+        msg = build_message('to.email')
+        self.assertEqual(msg.to, ['test@test.com'])

@@ -38,7 +38,11 @@ def build_message(template_names, extra_context=None, force_multipart=False,
     for field in ('to', 'bcc', 'cc', 'reply_to'):
         block = blocks.get(field)
         if block:
-            data[field] = block.render(extra_context).splitlines()
+            data[field] = [
+                line.strip()
+                for line in block.render(extra_context).splitlines()
+                if line.strip()
+            ]
 
     html_content = data.pop('html', None)
     if force_multipart or html_content:
