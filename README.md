@@ -55,6 +55,8 @@ A utility view is provided that extends ``django.views.generic.FormView`` to sen
 from mail_builder.views import EmailFormView
 ```
 
+When ``form_valid`` is called, it will build a message using ``email_template``, and pass the form's cleaned_data in context as `form`.
+
 Additional class properties:
 
 - email_template
