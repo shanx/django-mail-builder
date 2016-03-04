@@ -19,6 +19,8 @@ matrix:
       python: "pypy3"
 
 install:
-  - pip install -q $DJANGO
+  - pip install -q $DJANGO coverage
 script:
-  - python runtests.py
+  - coverage run --script mail_builder runtests.py
+after_script:
+  - coverage report
