@@ -21,6 +21,6 @@ matrix:
 install:
   - pip install -q $DJANGO coverage
 script:
-  - coverage run --script mail_builder runtests.py
+  - coverage run --source mail_builder runtests.py
 after_script:
   - coverage report
