@@ -1,0 +1,3 @@
+{% block to %}test@test.com{% endblock %}
+{% block subject %}Test View{% endblock %}
+{% block body %} Name = {{ form.name }} {% endblock %}
