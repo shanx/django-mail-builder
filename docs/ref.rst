@@ -17,9 +17,9 @@ Reference
 .. py:module:: mail_builder.views
 
 
-.. py:class:: EmailFormView
+.. py:class:: EmailFormMixin
 
-   A sub-class of ``FormView`` which renders and sends an email on form valid.
+   A mixin intended for ``FormView`` which renders and sends an email on form valid.
 
    .. py:attribute:: email_template
 
