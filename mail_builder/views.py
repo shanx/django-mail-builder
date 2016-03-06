@@ -28,7 +28,7 @@ class EmailFormMixin(object):
                             **kwargs)
         msg.send(fail_silently=self.fail_silently)
 
-        return super(EmailFormView, self).form_valid(form)
+        return super(EmailFormMixin, self).form_valid(form)
 
 
 class EmailFormView(EmailFormMixin, FormView):
