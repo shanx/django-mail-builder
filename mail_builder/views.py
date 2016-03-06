@@ -3,9 +3,9 @@ from django.views.generic import FormView
 from .builder import build_message
 
 
-class EmailFormView(FormView):
+class EmailFormMixin(object):
     '''
-    Utility view to send email on form submission.
+    Mixin to send email on valid form submit.
     '''
     email_template = None
     fail_silently = True
@@ -29,3 +29,10 @@ class EmailFormView(FormView):
         msg.send(fail_silently=self.fail_silently)
 
         return super(EmailFormView, self).form_valid(form)
+
+
+class EmailFormView(EmailFormMixin, FormView):
+    '''
+    Convenience view.
+    '''
+    pass
