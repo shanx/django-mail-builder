@@ -4,26 +4,16 @@ from django.template.loader import select_template
 from django.template.loader_tags import BlockNode
 
 
-def load_template(template_names):
+def build_message(template_names, extra_context=None, force_multipart=False,
+                  **defaults):
     if not isinstance(template_names, (list, tuple)):
         template_names = (template_names,)
-    template = select_template(template_names)
-    # Unwrap for Django 1.8+
-    template = getattr(template, 'template', template)
+    template = select_template(template_names).template
 
-    return template
-
-def get_blocks(template):
-    return {
+    blocks = {
         node.name: node
         for node in template.nodelist.get_nodes_by_type(BlockNode)
     }
-
-
-def build_message(template_names, extra_context=None, force_multipart=False,
-                  **defaults):
-    template = load_template(template_names)
-    blocks = get_blocks(template)
 
     if extra_context is None:
         extra_context = {}
